@@ -11,12 +11,7 @@ public class Main {
         IDAOFactory factory = DAOFactory.getInstance();
         CarDAO carDAO = factory.getCarDAO();
 
-        Car car = new Car();
-        car.setMark("Audi");
-        car.setModel("A8");
-        car.setPrice(1200000.00);
-
-        carDAO.add(car);
+        System.out.print(carDAO.getPriceByModel("A8"));
 
 
     }

@@ -37,6 +37,24 @@ public class CarJDBCDao implements CarDAO {
         }
     }
 
+    public double getPriceByModel(String model){
+        Connection connection = null;
+
+        try{
+            connection = getConnection();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("SELECT price FROM car where model = (?)");
+            statement.setString(1,model);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
     private int getMarkId(String markName, Connection connection){
         try{
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM  mark WHERE mark = ?");
@@ -51,6 +69,7 @@ public class CarJDBCDao implements CarDAO {
         return -1;
 
     }
+
 
     private Connection getConnection(){
 
